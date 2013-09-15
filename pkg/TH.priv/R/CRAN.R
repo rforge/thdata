@@ -42,7 +42,7 @@ print(dir)
                              dependencies = TRUE)
         } else {
             ipkg <- installed.packages(lib.loc = libdir)
-            deps <- deps[!(deps %in% rownames(ipkg))]
+            deps <- c(deps[!(deps %in% rownames(ipkg))], name)
             if (length(deps) > 0)
                 install.packages(deps,
                                  repos = "http://CRAN.at.R-project.org", lib = libdir,
@@ -51,6 +51,8 @@ print(dir)
                             repos = "http://CRAN.at.R-project.org")
         }
         oldversion <- packageDescription(name, lib.loc = libdir, fields = "Version")
+print(oldversion)
+print(version)
         stopifnot(compareVersion(oldversion, version) == -1)
         return(TRUE)
     }
