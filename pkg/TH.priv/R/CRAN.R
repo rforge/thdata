@@ -38,13 +38,15 @@ print(dir)
         if (!file.exists(libdir)) {
             dir.create(libdir)
             install.packages(deps, 
-                             repos = "http://CRAN.at.R-project.org", lib = libdir)
+                             repos = "http://CRAN.at.R-project.org", lib = libdir,
+                             dependencies = TRUE)
         } else {
             ipkg <- installed.packages(lib.loc = libdir)
             deps <- deps[!(deps %in% rownames(ipkg))]
             if (length(deps) > 0)
                 install.packages(deps,
-                                 repos = "http://CRAN.at.R-project.org", lib = libdir)
+                                 repos = "http://CRAN.at.R-project.org", lib = libdir,
+                                 dependencies = TRUE)
             update.packages(lib.loc = libdir, ask = FALSE, 
                             repos = "http://CRAN.at.R-project.org")
         }
@@ -91,7 +93,8 @@ print(dir)
         deps <- deps[!(deps %in% rownames(ipkg))]
         if (length(deps) > 0)
             install.packages(deps,
-                             repos = "http://CRAN.at.R-project.org", lib = libdir, dest = revdir)
+                             repos = "http://CRAN.at.R-project.org", lib = libdir, 
+                             dest = revdir, dependencies = TRUE)
 
         update.packages(lib.loc = libdir, ask = FALSE,
                         repos = "http://CRAN.at.R-project.org", dest = revdir)
