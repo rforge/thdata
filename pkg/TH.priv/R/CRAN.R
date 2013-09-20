@@ -26,7 +26,7 @@ print(dir)
     name <- .pkg_name(dir)
     version <- .pkg_version(dir)
     file <- ret <- paste(name, "_", version, ".tar.gz", sep = "")
-    deps <- name ###, .pkg_dep(dir))
+    deps <- c(name, .pkg_dep(dir))
     chkdir <- file.path(target, name)
     libdir <- file.path(target, name, "lib")
     revdir <- file.path(chkdir, "rev")
@@ -60,7 +60,7 @@ print(version)
 
     .build <- function() {
         system(paste("export R_LIBS=", libdir, 
-                     "; R CMD build ", dir, sep = ""))
+                     "/; R CMD build ", dir, sep = ""))
         system(paste("cp ", file, chkdir))
         return(TRUE)
     }
@@ -68,8 +68,8 @@ print(version)
     .check <- function(file, dir = chkdir) {
         wd <- setwd(dir)
         version <- packageDescription(name, lib.loc = libdir, fields = "Version")
-        system(paste("export R_LIBS=", libdir, "; ", Rbin, " CMD check --as-cran ",  file, " >>", 
-                     paste(file, ".checklog_", version, sep = "")))
+        system(paste("export R_LIBS=", libdir, "/; ", Rbin, " CMD check --as-cran ",  file, " >>", 
+                     paste(file, ".checklog_", version, sep = ""), sep = ""))
         setwd(wd)
         return(TRUE)
     }
@@ -119,9 +119,9 @@ print(version)
         if (removeRoutsave) 
             writeLines(c("Rout.save", "Examples"), 
                        con = file.path(name, ".Rbuildignore"))
-        system(paste("export R_LIBS=", libdir, "; ", 
-            Rbin, " CMD build --compact-vignettes=\"both\" --resave-data", 
-                     name))
+        system(paste("export R_LIBS=", libdir, "/; ", 
+            Rbin, " CMD build --compact-vignettes=\"both\" --resave-data ", 
+                     name, sep = ""))
         setwd(wd)
         return(TRUE)
      }
