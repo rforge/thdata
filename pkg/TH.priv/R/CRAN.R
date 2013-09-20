@@ -1,4 +1,5 @@
 
+
 .pkg_description <- function(dir)
     tools:::.read_description(file.path(dir, "DESCRIPTION"))
 
@@ -21,6 +22,7 @@ dependencies <- c("Depends", "Imports", "LinkingTo", "Suggests")
 
 make_check <- function(dir, revs = FALSE, removeRoutsave = FALSE) {
 
+.libPaths("")
 print(dir)
 
     name <- .pkg_name(dir)
@@ -93,10 +95,14 @@ print(version)
 
         ipkg <- installed.packages(lib.loc = libdir)
         deps <- deps[!(deps %in% rownames(ipkg))]
-        if (length(deps) > 0)
+        if (length(deps) > 0) {
             install.packages(deps,
                              repos = "http://CRAN.at.R-project.org", lib = libdir, 
-                             dest = revdir, dependencies = dependencies)
+                             dest = revdir, dependencies = TRUE)
+            install.packages(deps,
+                             repos = "http://CRAN.at.R-project.org", lib = libdir,
+                             dest = revdir, dependencies = "Suggests")
+        }        
 
         update.packages(lib.loc = libdir, ask = FALSE,
                         repos = "http://CRAN.at.R-project.org", dest = revdir)
