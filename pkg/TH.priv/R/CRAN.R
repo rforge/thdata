@@ -88,20 +88,38 @@ print(version)
         if (!file.exists(revdir))
             dir.create(revdir)
 
-        pkgs <- available.packages(contriburl = contrib.url("http://cran.at.r-project.org"))
-        pkgs <- pkgs[, c("Depends", "Imports")] ###, "Suggests", "Enhances")]
-        x <- do.call("paste", as.data.frame(pkgs))
-        deps <- odeps <- rownames(pkgs)[grep(name, x)]
+    .split_dependencies <- function(x) {
+        .split2 <- function(x) {
+            x <- sub("[[:space:]]+$", "", x)
+            x <- unique(sub("^[[:space:]]*(.*)", "\\1", x))
+            names(x) <- sub("^([[:alnum:].]+).*$", "\\1", x)
+            x <- x[names(x) != "R"]
+            x <- x[nzchar(x)]
+            x <- x[!duplicated(names(x))]
+            lapply(x, tools:::.split_op_version)
+        }
+        if (!any(nzchar(x))) 
+            return(list())
+        sapply(unlist(lapply(strsplit(x, ","), .split2), FALSE, FALSE), function(x) x$name)
+    }
 
+        pkgs <- available.packages(contriburl = contrib.url("http://cran.at.r-project.org"))
+        pkgs <- pkgs[, c("Depends", "Imports", "Suggests")]
+        x <- do.call("paste", as.data.frame(pkgs))
+        odeps <- rownames(pkgs)[grep(name, x)]
+        adeps <- unlist(lapply(odeps, function(o) {
+            s <- pkgs[o, "Suggests"]
+            if (is.na(s)) return(NA)
+            .split_dependencies(s)
+        }))
+        deps <- c(odeps, adeps[!is.na(adeps)])
+        
         ipkg <- installed.packages(lib.loc = libdir)
         deps <- deps[!(deps %in% rownames(ipkg))]
         if (length(deps) > 0) {
-            install.packages(deps,
+            install.packages(odeps,
                              repos = "http://CRAN.at.R-project.org", lib = libdir, 
                              dest = revdir, dependencies = TRUE)
-            install.packages(deps,
-                             repos = "http://CRAN.at.R-project.org", lib = libdir,
-                             dest = revdir, dependencies = "Suggests")
         }        
 
         update.packages(lib.loc = libdir, ask = FALSE,
