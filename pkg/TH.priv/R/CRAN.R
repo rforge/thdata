@@ -26,7 +26,7 @@ print(dir)
     name <- .pkg_name(dir)
     version <- .pkg_version(dir)
     file <- ret <- paste(name, "_", version, ".tar.gz", sep = "")
-    deps <- c(name, .pkg_dep(dir))
+    deps <- name ###, .pkg_dep(dir))
     chkdir <- file.path(target, name)
     libdir <- file.path(target, name, "lib")
     revdir <- file.path(chkdir, "rev")
@@ -87,7 +87,7 @@ print(version)
             dir.create(revdir)
 
         pkgs <- available.packages(contriburl = contrib.url("http://cran.at.r-project.org"))
-        pkgs <- pkgs[, c("Depends", "Imports", "Suggests", "Enhances")]
+        pkgs <- pkgs[, c("Depends", "Imports")] ###, "Suggests", "Enhances")]
         x <- do.call("paste", as.data.frame(pkgs))
         deps <- odeps <- rownames(pkgs)[grep(name, x)]
 
