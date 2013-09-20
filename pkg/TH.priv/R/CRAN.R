@@ -42,14 +42,14 @@ print(dir)
             dir.create(libdir)
             install.packages(deps, 
                              repos = "http://CRAN.at.R-project.org", lib = libdir,
-                             dependencies = dependencies)
+                             dependencies = TRUE)
         } else {
             ipkg <- installed.packages(lib.loc = libdir)
             deps <- c(deps[!(deps %in% rownames(ipkg))], name)
             if (length(deps) > 0)
                 install.packages(deps,
                                  repos = "http://CRAN.at.R-project.org", lib = libdir,
-                                 dependencies = dependencies)
+                                 dependencies = TRUE)
             update.packages(lib.loc = libdir, ask = FALSE, 
                             repos = "http://CRAN.at.R-project.org", checkBuilt = TRUE)
         }
