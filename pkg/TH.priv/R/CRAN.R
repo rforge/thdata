@@ -59,8 +59,8 @@ print(version)
     }
 
     .build <- function() {
-        system(paste("export R_LIBS=", libdir, sep = ""))
-        system(paste("R CMD build", dir))
+        system(paste("export R_LIBS=", libdir, 
+                     "; R CMD build ", dir, sep = ""))
         system(paste("cp ", file, chkdir))
         return(TRUE)
     }
@@ -68,8 +68,7 @@ print(version)
     .check <- function(file, dir = chkdir) {
         wd <- setwd(dir)
         version <- packageDescription(name, lib.loc = libdir, fields = "Version")
-        system(paste("export R_LIBS=", libdir, sep = ""))
-        system(paste(Rbin, " CMD check --as-cran",  file, " >>", 
+        system(paste("export R_LIBS=", libdir, "; ", Rbin, " CMD check --as-cran ",  file, " >>", 
                      paste(file, ".checklog_", version, sep = "")))
         setwd(wd)
         return(TRUE)
@@ -116,12 +115,12 @@ print(version)
 
     .build_CRAN <- function() {
         wd <- setwd(chkdir)
-        system(paste("export R_LIBS=", libdir, sep = ""))
         system(paste("tar -xzvf", file))
         if (removeRoutsave) 
             writeLines(c("Rout.save", "Examples"), 
                        con = file.path(name, ".Rbuildignore"))
-        system(paste(Rbin, " CMD build --compact-vignettes=\"both\" --resave-data", 
+        system(paste("export R_LIBS=", libdir, "; ", 
+            Rbin, " CMD build --compact-vignettes=\"both\" --resave-data", 
                      name))
         setwd(wd)
         return(TRUE)
