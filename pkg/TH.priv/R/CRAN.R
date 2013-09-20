@@ -51,7 +51,7 @@ print(dir)
                                  repos = "http://CRAN.at.R-project.org", lib = libdir,
                                  dependencies = dependencies)
             update.packages(lib.loc = libdir, ask = FALSE, 
-                            repos = "http://CRAN.at.R-project.org")
+                            repos = "http://CRAN.at.R-project.org", checkBuilt = TRUE)
         }
         oldversion <- packageDescription(name, lib.loc = libdir, fields = "Version")
 print(oldversion)
@@ -123,7 +123,7 @@ print(version)
         }        
 
         update.packages(lib.loc = libdir, ask = FALSE,
-                        repos = "http://CRAN.at.R-project.org", dest = revdir)
+                        repos = "http://CRAN.at.R-project.org", dest = revdir, checkBuilt = TRUE)
 
         wd <- setwd(revdir)
         pkgs <- sapply(strsplit(f <- list.files(pattern = "tar\\.gz"), "_"), function(x) x[1])
