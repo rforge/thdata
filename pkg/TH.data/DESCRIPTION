@@ -1,7 +1,7 @@
 Package: TH.data
 Title: TH's Data Archive
-Date: 2012-09-02
-Version: 1.0-0
+Date: 2012-09-24
+Version: 1.0-1
 Authors@R: c(person("Torsten", "Hothorn", role = c("aut", "cre"),
                     email = "Torsten.Hothorn@R-project.org"))
 Description: Contains data sets used on other packages I maintain.
