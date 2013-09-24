@@ -94,9 +94,9 @@
 
     data("wpbc", package = "TH.data")
 
-    ### fit logistic regression model with 100 boosting iterations
-    coef(glmboost(status ~ ., data = wpbc[,colnames(wpbc) != "time"],
-                  family = Binomial()))
+    ### fit logistic regression model 
+    coef(glm(status ~ ., data = wpbc[,colnames(wpbc) != "time"],
+             family = binomial()))
 
 }
 \keyword{datasets}
