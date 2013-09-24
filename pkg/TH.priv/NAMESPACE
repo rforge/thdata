@@ -1,3 +1,4 @@
 
 import(parallel)
+import(tools, Rdiff)
 export(make_check)

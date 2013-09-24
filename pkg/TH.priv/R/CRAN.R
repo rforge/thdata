@@ -1,5 +1,4 @@
-
-
+[B
 .pkg_description <- function(dir)
     tools:::.read_description(file.path(dir, "DESCRIPTION"))
 
@@ -18,7 +17,6 @@
 
 target <- "~/Rcheck"
 Rbin <- "/usr/src/R-devel/bin/R"
-dependencies <- c("Depends", "Imports", "LinkingTo", "Suggests")
 
 make_check <- function(dir, revs = FALSE, removeRoutsave = FALSE) {
 
@@ -167,4 +165,20 @@ print(version)
      }
 
      stopifnot(.build_CRAN())
+}
+
+make_diff <- function(revdir) {
+
+    pkgs <- list.files(path = revdir, pattern = "gz$")
+
+    for (p in pkgs) {
+        f <- list.files(pattern = paste(p, ".checklog", sep = ""), 
+                        path = revdir, full.names = TRUE)
+        d <- Rdiff(f[1], f[2])
+        if (!isTRUE(all.equal(d, 0L))) {
+            cat(p)
+            print(d)
+            cat("\n\n")
+        }
+    }
 }
