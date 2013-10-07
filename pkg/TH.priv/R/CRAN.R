@@ -139,7 +139,7 @@ print(version)
         wd <- setwd(chkdir)
         system(paste("tar -xzvf", file))
         if (removeRoutsave) 
-            writeLines(c("Rout.save", "Examples"), 
+            writeLines(c("Rout.save", "tests/Examples"), 
                        con = file.path(name, ".Rbuildignore"))
         system(paste("export R_LIBS=", libdir, "/; ", 
             Rbin, " CMD build --compact-vignettes=\"both\" --resave-data ", 
