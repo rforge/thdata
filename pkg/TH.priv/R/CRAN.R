@@ -1,4 +1,4 @@
-[B
+
 .pkg_description <- function(dir)
     tools:::.read_description(file.path(dir, "DESCRIPTION"))
 
