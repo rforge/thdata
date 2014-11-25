@@ -111,3 +111,13 @@ little easier to read:
 - makePolys() actually didn't find any use in the final version of the paper, 
   but is practical for setting up the polygons of the plots when displaying 
   the estimated values from the model.
+
+
+The results can be reproduced using the following package versions:
+
+lme4 version 1.0-0 (from R-forge)
+Matrix version 1.1-4
+fields version 6.8
+mvtnorm version 0.9-9995
+picante version 1.6-2
+ggplot2 version 1.0.0
