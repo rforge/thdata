@@ -115,7 +115,7 @@ little easier to read:
 
 The results can be reproduced using the following package versions:
 
-lme4 version 1.0-0 (from R-forge)
+lme4 version 1.0-0 (from R-forge), 1.1-6 from CRAN
 Matrix version 1.1-4
 fields version 6.8
 mvtnorm version 0.9-9995
