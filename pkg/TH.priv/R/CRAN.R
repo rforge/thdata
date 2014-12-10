@@ -1,7 +1,7 @@
 
-make_check <- function(srcpkg, dir = ".") {
+make_check <- function(srcpkg, dir = "./") {
 
-  if (dir == "") dir <- "."
+  if (dir == "") dir <- "./"
   .libPaths("") 
   options(repos = "http://CRAN.at.R-project.org")
   odir <- setwd(dir)
@@ -35,7 +35,7 @@ make_check <- function(srcpkg, dir = ".") {
 
   tools:::check_packages_in_dir_changes(ddir, cdir, outputs = TRUE, sources = TRUE)
 
-  setwd(odir)
+  # setwd(odir)
 
 }
 
