@@ -1,4 +1,2 @@
 
-import(parallel)
-importFrom(tools, Rdiff)
-export(make_check)
+import(tools)
