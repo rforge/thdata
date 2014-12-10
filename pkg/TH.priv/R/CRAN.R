@@ -1,6 +1,7 @@
 
 make_check <- function(srcpkg, dir = ".") {
 
+  if (dir == "") dir <- "."
   .libPaths("") 
   options(repos = "http://CRAN.at.R-project.org")
   odir <- setwd(dir)
