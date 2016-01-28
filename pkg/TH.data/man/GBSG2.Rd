@@ -25,7 +25,10 @@ III}.}
   }
 }
 \source{
-  \url{http://www.blackwellpublishers.com/rss/Volumes/A162p1.htm}
+  W. Sauerbrei and P. Royston (1999). Building multivariable prognostic
+  and diagnostic models: transformation of the predictors by using 
+  fractional polynomials. \emph{Journal of the Royal Statistics Society
+  Series A}, Volume \bold{162}(1), 71--94.
 }
 \references{
   M. Schumacher, G. Basert, H. Bojar,  K. Huebner, M. Olschewski, 
@@ -34,11 +37,6 @@ III}.}
   Randomized \eqn{2\times2} trial evaluating hormonal treatment
   and the duration of chemotherapy in node-positive breast cancer patients.
   \emph{Journal of Clinical Oncology}, \bold{12}, 2086--2093.
-
-  W. Sauerbrei and P. Royston (1999). Building multivariable prognostic
-  and diagnostic models: transformation of the predictors by using 
-  fractional polynomials. \emph{Journal of the Royal Statistics Society
-  Series A}, Volume \bold{162}(1), 71--94.
 }
 \examples{
 data(GBSG2)

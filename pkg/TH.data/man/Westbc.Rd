@@ -34,7 +34,6 @@
   Predicting the clinical status of human breast cancer by using
   gene expression profiles, \emph{Proceedings of the National Academy of Sciences},
   \bold{98}, 11462-11467.
-  \url{http://data.cgt.duke.edu/west.php}
 }
 \examples{
 
