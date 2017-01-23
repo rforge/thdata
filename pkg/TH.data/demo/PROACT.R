@@ -1480,11 +1480,11 @@ data$ALSFRS.Start <- as.numeric(as.character(data$ALSFRS.Start))
 data$ALSFRS.halfYearAfter <- as.numeric(as.character(data$ALSFRS.halfYearAfter))
 
 
+setwd(wdbase)
 
 save(data, file = paste0(outfolder, "RALSfinal.rda"))
 save(RALSclean, file = paste0(outfolder, "RALSfinal_list.rda"))
 
-setwd(wdbase)
 cat(paste("\n
           Your data files are called RALSfinal.rda and RALSfinal_list.rda.
           Read them into R using function read().\n"))
