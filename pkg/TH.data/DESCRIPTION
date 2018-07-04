@@ -1,6 +1,6 @@
 Package: TH.data
 Title: TH's Data Archive
-Date: 2018-06-22
+Date: 2018-07-04
 Version: 1.0-9
 Authors@R: c(person("Torsten", "Hothorn", role = c("aut", "cre"),
                     email = "Torsten.Hothorn@R-project.org"))
